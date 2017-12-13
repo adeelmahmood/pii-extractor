@@ -1,26 +1,27 @@
 package com.example;
 
 import com.example.json.Entry;
+import com.example.matchers.FirstNameThenLastNameMatcher;
 import com.example.matchers.LastNameThenFirstNameMatcher;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LastNameThenFirstNameMatcherTest {
+public class FirstNameThenLastNameMatcherTest {
 
-    LastNameThenFirstNameMatcher matcher = new LastNameThenFirstNameMatcher();
+    FirstNameThenLastNameMatcher matcher = new FirstNameThenLastNameMatcher();
 
     @Test
     public void match() throws Exception {
-        String line = "LastName, FirstName, (703)-711-0996, Blue, 11013";
+        String line = "FirstName, LastName, 12023, 636 121 1111, Yellow";
         assertThat(matcher.match(line)).isTrue();
         Entry entry = matcher.parse(line);
         assertThat(entry).isNotNull();
         assertThat(entry.getFirstName()).isEqualTo("FirstName");
         assertThat(entry.getLastName()).isEqualTo("LastName");
-        assertThat(entry.getPhoneNumber()).isEqualTo("(703)-711-0996");
-        assertThat(entry.getColor()).isEqualTo("Blue");
-        assertThat(entry.getZipCode()).isEqualTo("11013");
+        assertThat(entry.getPhoneNumber()).isEqualTo("636 121 1111");
+        assertThat(entry.getColor()).isEqualTo("Yellow");
+        assertThat(entry.getZipCode()).isEqualTo("12023");
     }
 
     @Test
@@ -29,8 +30,8 @@ public class LastNameThenFirstNameMatcherTest {
     }
 
     @Test
-    public void noMatchByNonZip() throws Exception {
-        assertThat(matcher.match("FirstName, LastName, 12023, 636 121 1111, Yellow")).isFalse();
+    public void noMatchByNonColor() throws Exception {
+        assertThat(matcher.match("LastName, FirstName, (703)-711-0996, Blue, 11013")).isFalse();
     }
 
     @Test
