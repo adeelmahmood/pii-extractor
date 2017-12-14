@@ -14,6 +14,7 @@ public class LastNameThenFirstNameMatcherTest {
     public void match() throws Exception {
         String line = "LastName, FirstName, (703)-711-0996, Blue, 11013";
         assertThat(matcher.match(line)).isTrue();
+
         Entry entry = matcher.parse(line);
         assertThat(entry).isNotNull();
         assertThat(entry.getFirstName()).isEqualTo("FirstName");

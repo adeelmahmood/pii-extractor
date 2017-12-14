@@ -15,6 +15,7 @@ public class FirstNameAndLastNameMatcherTest {
     public void match() throws Exception {
         String line = "FirstName LastName, Purple, 14537, 713 905 0383";
         assertThat(matcher.match(line)).isTrue();
+
         Entry entry = matcher.parse(line);
         assertThat(entry).isNotNull();
         assertThat(entry.getFirstName()).isEqualTo("FirstName");

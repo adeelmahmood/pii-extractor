@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.json.Entry;
 import com.example.json.Result;
 import org.assertj.core.api.Assert;
 import org.assertj.core.api.Assertions;
@@ -15,7 +16,6 @@ public class PIIExtractorTest {
 
     @Test
     public void extract() throws Exception {
-
         Result result = extractor.extract(Arrays.asList(
                 "Sam T., Washington, 85360, 353 791 6380, purple",
                 "Cameron, Kathy, (613)-658-9293, red, 143123121",
@@ -24,12 +24,14 @@ public class PIIExtractorTest {
         ));
 
         assertThat(result).isNotNull();
-//        assertThat(result.getEntries().size()).isEqualTo(1);
-//        assertThat(result.getEntries().stream().anyMatch(x -> x.getZipCode().equals("11013"))).isTrue();
-//        assertThat(result.getEntries().stream().filter(x -> x.getZipCode().equals("11013")).findFirst().get().getFirstName()).isEqualTo("FirstName");
-//        assertThat(result.getEntries().stream().filter(x -> x.getZipCode().equals("11013")).findFirst().get().getLastName()).isEqualTo("LastName");
-//        assertThat(result.getEntries().stream().filter(x -> x.getZipCode().equals("11013")).findFirst().get().getColor()).isEqualTo("Blue");
-//        assertThat(result.getEntries().stream().filter(x -> x.getZipCode().equals("11013")).findFirst().get().getPhoneNumber()).isEqualTo("(703)-711-0996");
+        assertThat(result.getEntries().size()).isEqualTo(3);
+        assertThat(result.getEntries().stream().anyMatch(x -> x.getZipCode().equals("85360"))).isTrue();
+
+        Entry entry = result.getEntries().stream().filter(x -> x.getZipCode().equals("85360")).findFirst().get();
+        assertThat(entry.getFirstName()).isEqualTo("Sam T.");
+        assertThat(entry.getLastName()).isEqualTo("Washington");
+        assertThat(entry.getColor()).isEqualTo("purple");
+        assertThat(entry.getPhoneNumber()).isEqualTo("353 791 6380");
         extractor.print(result);
     }
 }
