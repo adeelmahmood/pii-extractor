@@ -21,26 +21,3 @@
     4
   ]
 }
-
-{
-  "entries" : [ {
-    "color" : "purple",
-    "firstName" : "Sam T.",
-    "lastName" : "Washington",
-    "phoneNumber" : "353 791 6380",
-    "zipCode" : "85360"
-  }, {
-    "color" : "red",
-    "firstName" : "Kathy",
-    "lastName" : "Cameron",
-    "phoneNumber" : "(613)-658-9293",
-    "zipCode" : "143123121"
-  }, {
-    "color" : "yellow",
-    "firstName" : "Jamie",
-    "lastName" : "Stevenson",
-    "phoneNumber" : "028 164 6574",
-    "zipCode" : "84880"
-  } ],
-  "errors" : [ 4 ]
-}

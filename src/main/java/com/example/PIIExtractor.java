@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,18 @@ public class PIIExtractor {
 
     public Result extract(List<String> lines) throws IOException {
         Result result = new Result();
+
+        // it would be better to use java streams to process
+        // the lines because then we can possibly use
+        // parallel streams as well but since we need index for
+        // the error lines and java streams dont include the index
+        // and even though its possible to use a variable and increment
+        // it, it wont work with parallel streams .. because of that
+        // im using a for loop to iterate thru lines
+        // we would have been able to use streams if instead of the error
+        // line's index, we needed the error line itself to be added to the
+        // errors list
+
         // process all lines
         for (int i = 0; i < lines.size(); i++) {
             String line = lines.get(i);
@@ -43,9 +56,12 @@ public class PIIExtractor {
             if (entry.isPresent()) {
                 result.getEntries().add(entry.get());
             } else {
-                result.getErrors().add(i + 1);
+                result.getErrors().add(i);
             }
         }
+
+        // sort by last name
+        result.getEntries().sort(Comparator.comparing(Entry::getLastName));
         return result;
     }
 

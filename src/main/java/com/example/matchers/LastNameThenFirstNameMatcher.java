@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class LastNameThenFirstNameMatcher extends AbstractPIIMatcher {
 
-    private final Pattern pattern = Pattern.compile("[0-9]+");
+    private final Pattern pattern = Pattern.compile("[0-9]{5}");
 
     @Override
     protected boolean applyConditions(String[] tokens) {

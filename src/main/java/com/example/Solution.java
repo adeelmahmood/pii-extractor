@@ -6,7 +6,6 @@ import org.apache.commons.cli.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Arrays;
 
 public class Solution {
 
@@ -40,7 +39,7 @@ public class Solution {
     }
 
     private static CommandLine parseOptions(String[] args, Options opts) {
-        CommandLineParser parser = new GnuParser();
+        CommandLineParser parser = new DefaultParser();
         CommandLine cmd = null;
         try {
             cmd = parser.parse(opts, args);

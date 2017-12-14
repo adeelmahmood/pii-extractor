@@ -24,7 +24,7 @@ public class LastNameThenFirstNameMatcherTest {
         assertThat(entry.getZipCode()).isEqualTo("11013");
     }
 
-    @Test
+        @Test
     public void noMatchByTokens() throws Exception {
         assertThat(matcher.match("FirstName LastName, Purple, 14537, 713 905 0383")).isFalse();
     }
@@ -32,6 +32,11 @@ public class LastNameThenFirstNameMatcherTest {
     @Test
     public void noMatchByNonZip() throws Exception {
         assertThat(matcher.match("FirstName, LastName, 12023, 636 121 1111, Yellow")).isFalse();
+    }
+
+    @Test
+    public void noMatchByBadZip() throws Exception {
+        assertThat(matcher.match("LastName, FirstName, (703)-711-0996, Blue, 11013456")).isFalse();
     }
 
     @Test

@@ -23,8 +23,10 @@ public class PIIExtractorTest {
                 "asdfawfsdfsdfdsjh"
         ));
 
+        System.out.println(extractor.print(result));
+
         assertThat(result).isNotNull();
-        assertThat(result.getEntries().size()).isEqualTo(3);
+        assertThat(result.getEntries().size()).isEqualTo(2);
         assertThat(result.getEntries().stream().anyMatch(x -> x.getZipCode().equals("85360"))).isTrue();
 
         Entry entry = result.getEntries().stream().filter(x -> x.getZipCode().equals("85360")).findFirst().get();
