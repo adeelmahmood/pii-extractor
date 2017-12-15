@@ -1,4 +1,4 @@
-##PII Extractor
+## PII Extractor
 
 ### How to run
 
